@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TaskOne {
+public class task1 {
     WebDriver driver = new EdgeDriver();
 
     @AfterTest
@@ -53,11 +53,8 @@ public class TaskOne {
         //add assertion
         WebElement resultTitle = driver.findElement(By.cssSelector(".info-top"));
         Assert.assertEquals(resultTitle.getText(), addedTitle, "Title is not " + addedTitle);
+        Assert.assertEquals("toFail", addedTitle, "Title is not " + addedTitle);
 
-        //failed assert example
-//        Assert.assertEquals("toFail", addedTitle, "Title is not " + addedTitle);
-
-        //verify assertion
         System.out.println(resultTitle.getText() + " vs " + addedTitle);
         driver.quit();
     }
