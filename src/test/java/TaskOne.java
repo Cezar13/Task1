@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class task1 {
+public class TaskOne {
     WebDriver driver = new EdgeDriver();
 
     @AfterTest
@@ -28,7 +28,6 @@ public class task1 {
         //accepting privacy terms
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
                 .xpath("//span[text()='AGREE']"))).click();
-
 
         //unique identifier when using cssSelector
         WebElement code = driver.findElement(By.cssSelector("#postform-text"));
@@ -50,12 +49,13 @@ public class task1 {
                 .xpath("//button[@type='submit' and contains(text(),'Paste')]"));
         createPasteInput.click();
         System.out.println("Test");
+
         //add assertion
         WebElement resultTitle = driver.findElement(By.cssSelector(".info-top"));
         Assert.assertEquals(resultTitle.getText(), addedTitle, "Title is not " + addedTitle);
-        Assert.assertEquals("toFail", addedTitle, "Title is not " + addedTitle);
-
+        //failed assert example
+//        Assert.assertEquals("toFail", addedTitle, "Title is not " + addedTitle);
+        //soft verify assertion
         System.out.println(resultTitle.getText() + " vs " + addedTitle);
-        driver.quit();
     }
 }
