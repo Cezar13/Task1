@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,33 +16,33 @@ public class Main {
 
         driver.get("https://pastebin.com/");
 
+        //accepting privacy terms
         wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                .xpath("//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]")));
-        driver.findElement(By.xpath("//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]")).click();
+                .xpath("//span[text()='AGREE']"))).click();
 
 
-        WebElement code = driver.findElement(By.id("postform-text"));
+        //unique identifier when using cssSelector
+        WebElement code = driver.findElement(By.cssSelector("#postform-text"));
+        //adding requested text into code field
         code.sendKeys("Hello from WebDriver");
 
-        List<WebElement> options = driver.findElements(By
-                .xpath("//*[@id=\"select2-postform-expiration-container\"]"));
-        for (WebElement option : options) {
-            if (option.getText().contains("10 Minutes")) {
-                option.click();
-                break;
-            }
+        //opening the paste expiration dropdown and selecting requested 10 minutes time
+        WebElement pasteExpiration = driver.findElement(By.id("select2-postform-expiration-container"));
+        pasteExpiration.click();
+        driver.findElement(By.xpath("//li[text()='10 Minutes']")).click();
+
+        //adding the requested title
+        WebElement title = driver.findElement(By.id("postform-name"));
+        title.sendKeys("helloweb");
+
+        //submitting by clicking the Create New Paste button
+        WebElement createPasteInput = driver.findElement(By
+                .xpath("//button[@type='submit' and contains(text(),'Paste')]"));
+        createPasteInput.click();
 
 
-            WebElement title = driver.findElement(By.id("postform-name"));
-            title.sendKeys("helloweb");
-
-            WebElement createPasteInput = driver.findElement(By
-                    .xpath("//*[@id=\"w0\"]/div[5]/div[1]/div[10]/button"));
-            createPasteInput.click();
-
-            driver.quit();
+        driver.quit();
 
 
-        }
     }
 }
